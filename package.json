@@ -5,29 +5,32 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-
     "start": "npm run nginx:install && npm run docker:start && sleep 3 && sh scripts/open-nextjs.sh",
     "restart": "docker compose down && npm run start",
     "stop": "npm run docker:stop",
-
     "docker:start": "docker compose --env-file .env.dev.local up -d",
+    "docker:build": "npm run docker:start -- --build",
     "docker:stop": "docker compose down",
     "docker:shell:nextjs": "docker-compose exec nextjs /bin/sh",
     "docker:shell:nginx": "docker-compose exec nginx /bin/sh",
     "docker:log:nextjs": "docker compose logs --follow nextjs",
     "docker:log:nginx": "docker compose logs --follow nginx",
-
-    "nginx:install": "npm run install --workspace=nginx"
+    "nginx:install": "npm run install --workspace=nginx",
+    "proto:generate": "rm -rf packages/protobuf/generated/*.ts && protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --proto_path=./packages/protobuf/src --ts_proto_out=./packages/protobuf/generated --ts_proto_opt=esModuleInterop=true ./packages/protobuf/src/*.proto"
   },
   "dependencies": {
+    "long": "5.2.0",
     "next": "12.1.4",
     "react": "18.0.0",
-    "react-dom": "18.0.0"
+    "react-dom": "18.0.0",
+    "ts-proto": "1.110.2"
   },
   "devDependencies": {
     "@types/node": "17.0.23",
     "@types/react": "17.0.43",
     "typescript": "4.6.3"
   },
-  "workspaces": ["packages/*"]
+  "workspaces": [
+    "packages/*"
+  ]
 }

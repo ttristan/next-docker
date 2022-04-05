@@ -1,0 +1,1 @@
+- TS files automatically generated and updated by `npm run proto:generate`

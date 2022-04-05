@@ -22,7 +22,8 @@
     "jsx": "preserve",
     "baseUrl": "src",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@protobuf/*": ["../packages/protobuf/generated/*"]
     }
   },
   "include": [

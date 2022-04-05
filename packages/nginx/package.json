@@ -1,5 +1,4 @@
 {
-    "private": "true",
     "scripts": {
         "install": "sh ./scripts/certs.sh"
     }
