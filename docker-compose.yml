@@ -1,0 +1,33 @@
+# docker-compose.yml
+
+version: "3"
+
+services:
+  nginx:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./config/docker/nginx/certs:/etc/nginx/certs
+    depends_on:
+      - nextjs
+
+  nextjs:
+    build:
+      context: .
+      dockerfile: config/docker/Dockerfile.dev
+    container_name: nextjs
+    restart: always
+    volumes:
+      - ./:/app
+      - /app/node_modules
+      - /app/.next
+    ports:
+      - ${PORT}
+    environment:
+      - VIRTUAL_HOST=${SERVER_NAME}
+      - VIRTUAL_PORT=${PORT}
+      - PORT=${PORT}

@@ -1,0 +1,1 @@
+- keep files small, use feature components
