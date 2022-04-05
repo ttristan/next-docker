@@ -6,7 +6,6 @@
 
 ### Docker Helper
 - stop container: `npm run docker:stop`
-- (re)build container: `npm run docker:build`
 - run container shell `npm run docker:shell:nextjs` or `npm run docker:shell:nginx`
 - output container logs `npm run docker:log:nextjs` or `npm run docker:log:nginx`
 

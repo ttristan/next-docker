@@ -1,7 +1,12 @@
 # https://codewithhugo.com/docker-compose-local-https/
 
-
+cd ../..
 source scripts/load-env.sh
+
+if test -f ./packages/nginx/certs/$SERVER_NAME.crt; then
+  # already created
+  exit 0
+fi
 
 #! /bin/bash
 echo """
@@ -14,12 +19,12 @@ mkcert $SERVER_NAME
 
 echo """
 ==================================================
-  Moving certificates to ./config/docker/nginx/certs
+  Moving certificates to ./packages/nginx/certs
 ==================================================
 """
 
-mv ./$SERVER_NAME.pem ./config/docker/nginx/certs/$SERVER_NAME.crt
-mv ./$SERVER_NAME-key.pem ./config/docker/nginx/certs/$SERVER_NAME.key
+mv ./$SERVER_NAME.pem ./packages/nginx/certs/$SERVER_NAME.crt
+mv ./$SERVER_NAME-key.pem ./packages/nginx/certs/$SERVER_NAME.key
 
 echo """
 ==================================================

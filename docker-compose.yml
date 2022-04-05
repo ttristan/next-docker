@@ -11,14 +11,14 @@ services:
       - 443:443
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./config/docker/nginx/certs:/etc/nginx/certs
+      - ./packages/nginx/certs:/etc/nginx/certs
     depends_on:
       - nextjs
 
   nextjs:
     build:
       context: .
-      dockerfile: config/docker/Dockerfile.dev
+      dockerfile: docker/Dockerfile.dev
     container_name: nextjs
     restart: always
     volumes:
